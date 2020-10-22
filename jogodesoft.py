@@ -4,8 +4,9 @@
 import random
 fichas=100
 print("Seja bem vindo ao bacará!, pedimos apenas que suas apostas sejam valores inteiros :)")
+continuar = True
 
-while fichas>0:
+while continuar == True:
     
     print('Você tem {} fichas'.format (fichas))
     valor = int(input('Quanto deseja apostar ?'))
@@ -71,23 +72,30 @@ while fichas>0:
             if aposta == 'empate':
                 fichas = fichas + valor*8
                 print('voce ganhou {} fichas'.format(valor*8))
+                break
             else:
                 fichas = fichas - valor 
-                print('voce perdeu {} fchas'.format(valor))            
+                print('voce perdeu {} fchas'.format(valor)) 
+                break           
         elif somacartasj == 8 or somacartasj == 9:
             if aposta == 'jogador':
                 fichas = fichas + valor
                 print('voce ganhou {} fichas'.format(valor))
+                break
             else:
                 fichas = fichas - valor 
                 print('voce perdeu {} fichas'.format(valor))
+                break
         elif somacartasb == 8 or somacartasj == 9:
             if aposta == 'banco':
                 fichas = fichas + valor*0.95
                 print('voce ganhou {} fichas'.format(valor*0.95))
+                break
             else:
                 fichas = fichas - valor 
-                print('voce perdeu {} fichas'.format(valor))                        
+                print('voce perdeu {} fichas'.format(valor)) 
+                break   
+                          
             
     #condicao para dar mais uma carta ou nao:
     if somacartasj <= 5:
@@ -96,6 +104,16 @@ while fichas>0:
     if somacartasb <= 5:
         somacartasb = somacartasb + cartab2
         print('o banco recebeu mais uma carta: {}'.format(cartab2))
+
+    # condicoes para nova somatória das cartas
+    if somacartasj >= 20:
+        somacartasj = somacartasj - 20
+    elif somacartasj >= 10:
+        somacartasj = somacartasj - 10
+    if somacartasb >= 20:
+        somacartasb = somacartasb - 20       
+    elif somacartasb >= 10:
+        somacartasb = somacartasb - 10
     
     # quem ganhou o jogo?
     j = (somacartasj - 9)**2
@@ -104,7 +122,7 @@ while fichas>0:
     if j<b:
         if aposta == 'jogador':
             fichas = fichas + valor
-            print('voce ganhou{} fichas'.format(valor))
+            print('voce ganhou {} fichas'.format(valor))
         else:
             fichas = fichas - valor 
             print('voce perdeu {} fichas'.format(valor))
@@ -122,6 +140,13 @@ while fichas>0:
         else:
             fichas = fichas - valor 
             print('voce perdeu {} fichas'.format(valor))
+    
+    prosseguir2 = input('deseja continuar?') 
+    if prosseguir2 == 'nao' or prosseguir2 == 'não':
+        print('voce acabou terminando o jogo com {} fichas'.format(fichas))
+        continuar = False
+    else:
+        continuar = True                 
 
     
     
